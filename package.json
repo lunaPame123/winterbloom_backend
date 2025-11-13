@@ -1,0 +1,20 @@
+{
+  "name": "winterbloom_backend",
+  "version": "1.0.0",
+  "description": "El proyecto consiste en desarrollar una **aplicación web para la venta de arreglos florales**, que permitirá a los usuarios explorar un catálogo de ramos prediseñados según el tipo de evento, como cumpleaños, bodas o aniversarios, así como crear ramos personalizados seleccionando flores, colores y accesorios. La plataforma ofrecerá una interfaz intuitiva y responsiva, permitirá gestionar pedidos de manera segura y proporcionará información detallada sobre cada arreglo. Además, contará con funcionalidades que faciliten la administración de productos y pedidos, garantizando eficiencia y escalabilidad para futuras mejoras del sistema.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lunaPame123/winterbloom_backend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lunaPame123/winterbloom_backend/issues"
+  },
+  "homepage": "https://github.com/lunaPame123/winterbloom_backend#readme"
+}
