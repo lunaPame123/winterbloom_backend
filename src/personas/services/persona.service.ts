@@ -11,4 +11,10 @@ export class PersonaService {
   async listarPersonas(){
     return await PersonaRepository.listarConUsuarios();
   }
+
+  async obtenerPersonaId(idPersona: number){
+    const persona = await PersonaRepository.buscarPorId(idPersona);
+    if (!persona) throw new Error("Persona no encontrada");
+    return persona;
+  }
 }
