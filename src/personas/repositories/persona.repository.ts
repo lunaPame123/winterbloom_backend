@@ -1,28 +1,34 @@
 import { AppDataSource } from "../../database/data-source";
 import { Persona } from "../entities/persona.entity";
-import { Repository } from "typeorm";
 
-export class PersonaRepository {
-  private repo: Repository<Persona>;
+export const PersonaRepository = AppDataSource.getRepository(Persona).extend({
 
-  constructor() {
-    this.repo = AppDataSource.getRepository(Persona);
-  }
+  async buscarPorId(idPersona: number) {
+    return await this.findOne({
+      where: { idPersona },
+      relations: ["usuario", "pedidos"],
+    });
+  },
 
-  async findAll() {
-    return this.repo.find({ relations: ["rol"] });
-  }
+  async buscarPorCi(ci: string) {
+    return await this.findOne({ where: { ci } });
+  },
 
-  async findById(id: number) {
-    return this.repo.findOne({ where: { idPersona: id }, relations: ["rol"] });
-  }
+  async listarConUsuarios() {
+    return await this.find({
+      relations: ["usuario"],
+      order: { idPersona: "ASC" }
+    });
+  },
 
-  async findByCorreo(correo: string) {
-    return this.repo.findOne({ where: { correo }, relations: ["rol"] });
-  }
+  async crearPersona(data: Partial<Persona>) {
+    const persona = this.create(data);
+    return await this.save(persona);
+  },
 
-  async createAndSave(data: Partial<Persona>): Promise<Persona> {
-    const persona = this.repo.create(data);
-    return this.repo.save(persona);
-  }
-}
+  async actualizarPersona(idPersona: number, data: Partial<Persona>) {
+    await this.update(idPersona, data);
+    return await this.buscarPorId(idPersona);
+  },
+
+});
