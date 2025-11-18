@@ -1,9 +1,10 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToOne, OneToMany } from "typeorm";
 import { Usuario } from "../../usuarios/entities/usuario.entity";
+import { Pedido } from "../../pedidos/entities/pedido.entity";
 
-@Entity("PERSONA")
+@Entity({ name: "persona" })
 export class Persona {
-  @PrimaryGeneratedColumn({ name: "idPersona" })
+  @PrimaryGeneratedColumn()
   idPersona!: number;
 
   @Column({ unique: true, length: 20 })
@@ -27,6 +28,9 @@ export class Persona {
   @Column({ length: 10, nullable: true })
   sexo?: string;
 
-  @ManyToOne(() => Usuario, usuario => usuario.persona)
+  @OneToOne(() => Usuario, usuario => usuario.persona)
   usuarios!: Usuario[];
+
+  @OneToMany(() => Pedido, pedido => pedido.persona)
+  pedidos!: Pedido [];
 }
