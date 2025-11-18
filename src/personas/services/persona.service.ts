@@ -17,4 +17,11 @@ export class PersonaService {
     if (!persona) throw new Error("Persona no encontrada");
     return persona;
   }
+
+  async actualizarPersona (idPersona: number, data: any){
+    const persona = await PersonaRepository.buscarPorId(idPersona);
+    if (!persona) throw new Error ("Persona no encontrada");
+
+    return await PersonaRepository.actualizarPersona(idPersona, data);
+  }
 }
