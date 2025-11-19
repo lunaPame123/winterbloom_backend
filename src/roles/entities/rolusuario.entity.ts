@@ -13,5 +13,5 @@ export class RolUsuario {
 
     @ManyToOne(() => Rol, rol => rol.usuarios)
     @JoinColumn({ name: "idRol" })
-    rol: Rol;
+    rol!: Rol;
 }
