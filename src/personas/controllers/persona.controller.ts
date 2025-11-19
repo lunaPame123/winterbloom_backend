@@ -21,4 +21,14 @@ export class PersonaController {
             res.status(400).json({ error: error.message});
         }
     }
+
+    static async obtener(req: Request, res:Response){
+        try{
+            const idPersona = parseInt(req.params.idPersona);
+            const persona = await service.obtenerPersonaId(idPersona);
+            res.json(persona);
+        } catch (error: any){
+            res.status(404).json({ error: error.message});
+        }
+    }
 }
