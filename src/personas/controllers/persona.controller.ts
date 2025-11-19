@@ -31,4 +31,14 @@ export class PersonaController {
             res.status(404).json({ error: error.message});
         }
     }
+
+    static async actualizar(req: Request, res: Response){
+        try {
+            const idPersona = parseInt(req.params.idPersona);
+            const persona = await service.actualizarPersona(idPersona, req.body);
+            res.json(persona);
+        } catch (error: any){
+            res.status(400).json({ error: error.message});
+        }
+    }
 }
