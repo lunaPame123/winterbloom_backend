@@ -1,15 +1,11 @@
 import { RolRepository } from "../repositories/rol.repository";
 
 export class RolService {
-  private repository = new RolRepository();
-
-  async getAll() {
-    return this.repository.findAll();
+  async crear(data: any){
+    return await RolRepository.crearRol(data);
   }
 
-  async create(data: { nombreRol: string; descripcion?: string }) {
-    const exists = await this.repository.findByName(data.nombreRol);
-    if (exists) throw new Error("El rol ya existe");
-    return this.repository.create(data);
+  async listar(){
+    return await RolRepository.listarRoles();
   }
 }
