@@ -1,9 +1,9 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
 import { RolUsuario } from "../../usuarios/entities/rolusuario.entity";
 
-@Entity("ROL")
+@Entity({ name: "rol" })
 export class Rol {
-  @PrimaryGeneratedColumn({ name: "idRol" })
+  @PrimaryGeneratedColumn()
   idRol!: number;
 
   @Column({ unique: true, length: 50 })
@@ -13,5 +13,5 @@ export class Rol {
   descripcion?: string;
 
   @OneToMany(() => RolUsuario, rolUsuario => rolUsuario.rol)
-  usuariosRol!: RolUsuario[];
+  usuarios!: RolUsuario[];
 }
