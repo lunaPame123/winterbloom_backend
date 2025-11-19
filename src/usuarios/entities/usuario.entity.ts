@@ -1,19 +1,18 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, OneToMany } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn, OneToMany } from "typeorm";
 import { Persona } from "../../personas/entities/persona.entity";
 import { RolUsuario } from "./rolusuario.entity";
 import { Favorito } from "./favorito.entity";
-import { Pedido } from "../../pedidos/entities/pedido.entity";
 
-@Entity("USUARIO")
-export class Usuario {
-  @PrimaryGeneratedColumn({ name: "idUsuario" })
+@Entity({ name: "usuario" })
+export class Usuario{
+  @PrimaryGeneratedColumn()
   idUsuario!: number;
 
-  @ManyToOne(() => Persona, persona => persona.usuarios)
-  @JoinColumn({ name: "idPersona" })
+  @OneToOne(() => Persona, { eager: true})
+  @JoinColumn({ name: "idPersona"})
   persona!: Persona;
 
-  @Column({ unique: true, length: 100 })
+  @Column({ unique: true})
   correo!: string;
 
   @Column()
@@ -22,24 +21,23 @@ export class Usuario {
   @Column({ length: 50, nullable: true })
   usuarioCreacion?: string;
 
-  @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" })
+  @Column()
   fechaCreacion?: Date;
 
   @Column({ length: 50, nullable: true })
   usuarioModificacion?: string;
 
-  @Column({ type: "timestamp", nullable: true })
+  @Column({ nullable: true })
   fechaModificacion?: Date;
 
   @Column({ default: true })
   estado?: boolean;
 
   @OneToMany(() => RolUsuario, rolUsuario => rolUsuario.usuario)
-  rolesUsuario!: RolUsuario[];
+  roles!: RolUsuario[];
 
-  @OneToMany(() => Favorito, favorito => favorito.usuario)
-  favoritos!: Favorito[];
-
-  @OneToMany(() => Pedido, pedido => pedido.usuario)
-  pedidos!: Pedido[];
+  @OneToMany(()=> Favorito, favorito => favorito.usuario)
+  favoritos?: Favorito[];
 }
+
+
