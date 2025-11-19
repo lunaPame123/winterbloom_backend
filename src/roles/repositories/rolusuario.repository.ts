@@ -1,5 +1,5 @@
 import { AppDataSource } from "../../database/data-source";
-import { RolUsuario } from "../entities/rolUsuario.entity";
+import { RolUsuario } from "../entities/rolusuario.entity";
 
 export const RolUsuarioRepository = AppDataSource.getRepository(RolUsuario). extend({
 
