@@ -12,4 +12,13 @@ export class PersonaController {
             res.status(400).json({error: error.message});
         }
     }
+
+    static async listar(req: Request, res: Response){
+        try {
+            const personas = await service.listarPersonas();
+            res.json(personas);
+        } catch (error: any){
+            res.status(400).json({ error: error.message});
+        }
+    }
 }
