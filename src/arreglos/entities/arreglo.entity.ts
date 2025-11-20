@@ -1,14 +1,14 @@
 import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 
-@Entity("ARREGLO")
+@Entity({ name: "arreglo"})
 export class Arreglo {
-  @PrimaryGeneratedColumn({ name: "idArreglo" })
+  @PrimaryGeneratedColumn()
   idArreglo!: number;
 
   @Column({ length: 100 })
   nombre!: string;
 
-  @Column({ type: "text", nullable: true })
+  @Column({ type: "text" })
   descripcion?: string;
 
   @Column({ type: "decimal", precision: 10, scale: 2 })
@@ -20,13 +20,13 @@ export class Arreglo {
   @Column({ nullable: true })
   imagen?: string;
 
-    @Column({ length: 50, nullable: true })
+  @Column()
   usuarioCreacion?: string;
 
-  @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" })
+  @Column({ type: "timestamp" })
   fechaCreacion?: Date;
 
-  @Column({ length: 50, nullable: true })
+  @Column({ nullable: true })
   usuarioModificacion?: string;
 
   @Column({ type: "timestamp", nullable: true })
