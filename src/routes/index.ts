@@ -5,6 +5,7 @@ import rolRoutes from "../roles/routes/rol.routes";
 import rolUsuarioRoutes from "../roles/routes/rolusuario.routes";
 import arregloRoutes from "../arreglos/routes/arreglo.routes";
 import florRoutes from "../flores/routes/flor.routes";
+import composicionArregloRoutes from "../composicionArreglos/routes/composicionArreglo.routes";
 
 const router = Router();
 
@@ -14,5 +15,6 @@ router.use("/roles", rolRoutes);
 router.use("/roles-usuario", rolUsuarioRoutes);
 router.use("/arreglos", arregloRoutes);
 router.use("/flores", florRoutes);
+router.use("/composiciones", composicionArregloRoutes);
 
 export default router;
