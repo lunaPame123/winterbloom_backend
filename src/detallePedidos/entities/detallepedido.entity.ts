@@ -1,10 +1,10 @@
 import { Entity, PrimaryGeneratedColumn, ManyToOne, JoinColumn, Column } from "typeorm";
-import { Pedido } from "./pedido.entity";
+import { Pedido } from "../../pedidos/entities/pedido.entity"; 
 import { Arreglo } from "../../arreglos/entities/arreglo.entity";
 
-@Entity("DETALLEPEDIDO")
+@Entity({name: "Detalle_Pedido"})
 export class DetallePedido {
-  @PrimaryGeneratedColumn({ name: "idDetalle" })
+  @PrimaryGeneratedColumn()
   idDetalle!: number;
 
   @ManyToOne(() => Pedido, pedido => pedido.detalles)

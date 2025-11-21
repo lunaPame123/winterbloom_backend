@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, OneToMany } from "typeorm";
 import { Persona } from "../../personas/entities/persona.entity";
-import { DetallePedido } from "./detallepedido.entity";
+import { DetallePedido } from "../../detallePedidos/entities/detallepedido.entity"; 
 
 @Entity({name: "pedido"})
 export class Pedido {
