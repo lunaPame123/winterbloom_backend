@@ -7,6 +7,8 @@ import arregloRoutes from "../arreglos/routes/arreglo.routes";
 import florRoutes from "../flores/routes/flor.routes";
 import composicionArregloRoutes from "../composicionArreglos/routes/composicionArreglo.routes";
 import favoritoRoutes from "../favoritos/routes/favorito.routes";
+import pedidoRoutes from "../pedidos/routes/pedido.routes";
+import detalleRoutes from "../detallePedidos/routes/detallepedido.routes";
 
 const router = Router();
 
@@ -18,5 +20,7 @@ router.use("/arreglos", arregloRoutes);
 router.use("/flores", florRoutes);
 router.use("/composiciones", composicionArregloRoutes);
 router.use("/favoritos", favoritoRoutes);
+router.use("/pedidos", pedidoRoutes);
+router.use("/detalle-pedidos", detalleRoutes);
 
 export default router;
