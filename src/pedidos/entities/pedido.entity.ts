@@ -1,17 +1,17 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, OneToMany } from "typeorm";
-import { Usuario } from "../../usuarios/entities/usuario.entity";
+import { Persona } from "../../personas/entities/persona.entity";
 import { DetallePedido } from "./detallepedido.entity";
 
-@Entity("PEDIDO")
+@Entity({name: "pedido"})
 export class Pedido {
-  @PrimaryGeneratedColumn({ name: "idPedido" })
+  @PrimaryGeneratedColumn()
   idPedido!: number;
 
-  @ManyToOne(() => Usuario, usuario => usuario.pedidos)
-  @JoinColumn({ name: "idUsuario" })
-  usuario!: Usuario;
+  @ManyToOne(() => Persona, { nullable: false })
+  @JoinColumn({ name: "idPersona" })
+  persona!: Persona;
 
-  @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" })
+  @Column({ type: "timestamp" })
   fechaPedido!: Date;
 
   @Column({ type: "decimal", precision: 10, scale: 2 })
@@ -21,16 +21,16 @@ export class Pedido {
   estado!: boolean;
 
   @Column({ length: 50, nullable: true })
-  usuarioCreacion?: string;
+  usuarioCreacion!: string;
 
   @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" })
-  fechaCreacion?: Date;
+  fechaCreacion!: Date;
 
   @Column({ length: 50, nullable: true })
-  usuarioModificacion?: string;
+  usuarioModificacion!: string;
 
   @Column({ type: "timestamp", nullable: true })
-  fechaModificacion?: Date;
+  fechaModificacion!: Date;
 
   @OneToMany(() => DetallePedido, detalle => detalle.pedido)
   detalles!: DetallePedido[];
