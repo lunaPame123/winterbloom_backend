@@ -1,7 +1,7 @@
 import { PedidoRepository } from "../repositories/pedido.repository";
-import { DetallePedidoRepository } from "../../detallePedidos/repositories/detallePedido.repository"; 
+import { DetallePedidoRepository } from "../repositories/detallePedido.repository"; 
 import { Pedido } from "../entities/pedido.entity";
-import { DetallePedido } from "../../detallePedidos/entities/detallepedido.entity";
+import { DetallePedido } from "../entities/detallepedido.entity";
 
 export class PedidoService {
 
