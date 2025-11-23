@@ -4,9 +4,8 @@ import { DetallePedido } from "../entities/detallepedido.entity";
 export class DetallePedidoService {
 
   async obtenerPorPedido(idPedido: number): Promise<DetallePedido[]> {
-    const detalles = await DetallePedidoRepository.obtenerDetallesPorPedido(idPedido);
-    if (!detalles) return [];
-    return detalles;
+    const detalles = await DetallePedidoRepository.obtenerDetallePorPedido(idPedido);
+    return detalles || [];
   }
 
   async crearDetalle(detalleData: Partial<DetallePedido>): Promise<DetallePedido> {
@@ -22,10 +21,4 @@ export class DetallePedidoService {
     return detalleCreado;
   }
 
-  async eliminarDetalle(idDetalle: number) {
-    const detalle = await DetallePedidoRepository.findOne({ where: { idDetalle } });
-    if (!detalle) throw new Error("Detalle no encontrado");
-    await DetallePedidoRepository.eliminarDetalle(idDetalle);
-    return { mensaje: "Detalle eliminado correctamente" };
-  }
 }

@@ -18,7 +18,9 @@ export class PedidoService {
         subtotal: d.precioUnitario! * d.cantidad!
         }));
 
-        await DetallePedidoRepository.crearVariosDetalles(detalles);
+        for (const detalle of detalles) {
+            await DetallePedidoRepository.crearDetallePedido(detalle);
+        }
 
         const total = detalles.reduce((sum, d) => sum + d.subtotal!, 0);
         await PedidoRepository.actualizarPedido(nuevoPedido.idPedido, { total });
@@ -30,7 +32,7 @@ export class PedidoService {
     }
 
     async obtenerTodos(): Promise<Pedido[]> {
-        return await PedidoRepository.obtenerPedidos();
+        return await PedidoRepository.listarPedidos();
     }
 
     async obtenerPorId(idPedido: number): Promise<Pedido> {
@@ -39,10 +41,13 @@ export class PedidoService {
         return pedido;
     }
 
-    async eliminar(idPedido: number) {
+    async obtenerPorUsuario(idUsuario: number): Promise<Pedido[]> {
+        return await PedidoRepository.obtenerPedidosPorUsuario(idUsuario);
+    }
+
+    async actualizarEstado(idPedido: number, nuevoEstado: "pendiente" | "listo" | "entregado" | "cancelado") {
         const pedido = await PedidoRepository.obtenerPedidoPorId(idPedido);
         if (!pedido) throw new Error("Pedido no encontrado");
-        await PedidoRepository.eliminarPedido(idPedido);
-        return { mensaje: "Pedido eliminado (lógico) correctamente" };
+        return await PedidoRepository.cambiarEstado(idPedido, nuevoEstado);
     }
 }
