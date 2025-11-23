@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, ManyToOne, JoinColumn, Column } from "typeorm";
 import { Usuario } from "./usuario.entity";
 import { Rol } from "../../roles/entities/rol.entity";
 
@@ -14,4 +14,7 @@ export class RolUsuario {
   @ManyToOne(() => Rol, rol => rol.usuarios)
   @JoinColumn({ name: "idRol" })
   rol!: Rol;
+
+  @Column({ default: true})
+  estado!: boolean;
 }

@@ -12,7 +12,7 @@ export const RolUsuarioRepository = AppDataSource.getRepository(RolUsuario). ext
     },
 
     async eliminarAsignacionDeRol(idUsuarioRol: number){
-        await this.delete(idUsuarioRol);
+        await this.update(idUsuarioRol, { estado: false});
         return true;
     }
 })
