@@ -1,6 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne, OneToMany } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn } from "typeorm";
 import { Usuario } from "../../usuarios/entities/usuario.entity";
-import { Pedido } from "../../pedidos/entities/pedido.entity";
 
 @Entity({ name: "persona" })
 export class Persona {
@@ -16,21 +15,19 @@ export class Persona {
   @Column({ length: 50 })
   apellidoPaterno!: string;
 
-  @Column({ length: 50 })
+  @Column({ length: 50, nullable: true })
   apellidoMaterno?: string;
 
-  @Column({ length: 50, nullable: true })
-  ciudad?: string;
+  @Column({ length: 50 })
+  ciudad!: string;
 
-  @Column({ type: "date", nullable: true })
-  fechaNacimiento?: string;
+  @Column({ type: "date"})
+  fechaNacimiento!: Date;
 
-  @Column({ length: 10, nullable: true })
-  sexo?: string;
+  @Column({ length: 10 })
+  sexo!: string;
 
   @OneToOne(() => Usuario, usuario => usuario.persona)
-  usuarios!: Usuario[];
-
-  @OneToMany(() => Pedido, pedido => pedido.persona)
-  pedidos!: Pedido [];
+  @JoinColumn({ name: "idUsuario"})
+  usuario!: Usuario;
 }
