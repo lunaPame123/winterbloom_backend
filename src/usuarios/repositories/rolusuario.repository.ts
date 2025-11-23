@@ -4,14 +4,14 @@ import { RolUsuario } from "../entities/rolusuario.entity";
 export const RolUsuarioRepository = AppDataSource.getRepository(RolUsuario). extend({
 
     async asignarRol(idUsuario: number, idRol: number){
-        const rolUsuario = this.create({
+        const nuevaAsignacion = this.create({
             usuario: { idUsuario},
             rol: { idRol }
         });
-        return await this.save(rolUsuario);
+        return await this.save(nuevaAsignacion);
     },
 
-    async eliminarRol(idUsuarioRol: number){
+    async eliminarAsignacionDeRol(idUsuarioRol: number){
         await this.delete(idUsuarioRol);
         return true;
     }
