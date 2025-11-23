@@ -14,5 +14,5 @@ export const AppDataSource = new DataSource({
   database: process.env.DB_NAME,
   synchronize: true,
   logging: true,
-  entities: [path.join(__dirname, "..", "**", "entities", "*.entity.{ts,js}")],
+  entities: [path.join(__dirname, "..", "**", "entities", "*.entity.ts")],
 });

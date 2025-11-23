@@ -2,13 +2,13 @@ import { Router } from "express";
 import personaRoutes from "../personas/routes/persona.routes";
 import usuarioRoutes from "../usuarios/routes/usuario.routes";
 import rolRoutes from "../roles/routes/rol.routes";
-import rolUsuarioRoutes from "../roles/routes/rolusuario.routes";
+import rolUsuarioRoutes from "../usuarios/routes/rolusuario.routes";
 import arregloRoutes from "../arreglos/routes/arreglo.routes";
 import florRoutes from "../flores/routes/flor.routes";
-import composicionArregloRoutes from "../composicionArreglos/routes/composicionArreglo.routes";
-import favoritoRoutes from "../favoritos/routes/favorito.routes";
+import composicionArregloRoutes from "../arreglos/routes/composicionArreglo.routes";
+import favoritoRoutes from "../usuarios/routes/favorito.routes";
 import pedidoRoutes from "../pedidos/routes/pedido.routes";
-import detalleRoutes from "../detallePedidos/routes/detallepedido.routes";
+import detalleRoutes from "../pedidos/routes/detallepedido.routes";
 
 const router = Router();
 
