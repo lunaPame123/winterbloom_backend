@@ -1,13 +1,13 @@
 import { Request, Response } from "express";
 import { PersonaService } from "../services/persona.service";
 
-const service = new PersonaService();
+const personaService = new PersonaService();
 
 export class PersonaController {
     static async crear (req: Request, res: Response){
         try {
-            const persona = await service.crearPersonas(req.body);
-            res.json(persona);
+            const nuevaPersona = await personaService.crearPersona(req.body);
+            res.status(201).json({ data: nuevaPersona });
         } catch(error: any){
             res.status(400).json({error: error.message});
         }
@@ -15,8 +15,8 @@ export class PersonaController {
 
     static async listar(req: Request, res: Response){
         try {
-            const personas = await service.listarPersonas();
-            res.json(personas);
+            const personas = await personaService.listarPersonas();
+            res.json({ data: personas });
         } catch (error: any){
             res.status(400).json({ error: error.message});
         }
@@ -25,20 +25,20 @@ export class PersonaController {
     static async obtener(req: Request, res:Response){
         try{
             const idPersona = parseInt(req.params.idPersona);
-            const persona = await service.obtenerPersonaId(idPersona);
-            res.json(persona);
+            const persona = await personaService.obtenerPersonaPorId(idPersona);
+            res.json({ data: persona });
         } catch (error: any){
-            res.status(404).json({ error: error.message});
+            res.status(404).json({ error: error.message });
         }
     }
 
     static async actualizar(req: Request, res: Response){
         try {
             const idPersona = parseInt(req.params.idPersona);
-            const persona = await service.actualizarPersona(idPersona, req.body);
-            res.json(persona);
+            const personaActualizada = await personaService.actualizarPersona(idPersona, req.body);
+            res.json({ data: personaActualizada });
         } catch (error: any){
-            res.status(400).json({ error: error.message});
+            res.status(400).json({ error: error.message });
         }
     }
 }
