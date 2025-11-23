@@ -3,31 +3,31 @@ import { Favorito } from "../entities/favorito.entity";
 
 export class FavoritoService {
 
-  async obtenerTodos() {
-    return await FavoritoRepository.obtenerTodosLosFavoritos();
+  async listarTodosFavoritos() {
+    return await FavoritoRepository.listarTodosLosFavoritos();
   }
 
-  async obtenerPorId(id: number) {
-    const favorito = await FavoritoRepository.obtenerFavoritosPorId(id);
+  async obtenerFavoritoPorId(idFavorito: number) {
+    const favorito = await FavoritoRepository.obtenerFavoritoPorId(idFavorito);
     if (!favorito) {
-      throw new Error("El favorito no existe");
+      throw new Error("El favorito con este ID no existe");
     }
     return favorito;
   }
 
-  async obtenerPorUsuario(idUsuario: number) {
-    return await FavoritoRepository.obtenerFavoritosPorUsuario(idUsuario);
+  async listarFavoritosPorUsuario(idUsuario: number) {
+    return await FavoritoRepository.listarFavoritosPorUsuario(idUsuario);
   }
 
-  async crear(data: Partial<Favorito>) {
+  async crearFavorito(data: Partial<Favorito>) {
     if (!data.usuario) throw new Error("Se debe especificar el usuario");
     if (!data.arreglo) throw new Error("Se debe especificar el arreglo");
 
     return await FavoritoRepository.crearFavorito(data);
   }
 
-  async eliminacionLogica(id: number) {
-    await this.obtenerPorId(id);
-    return await FavoritoRepository.eliminarFavorito(id);
+  async eliminarFavorito(idFavorito: number) {
+    await this.obtenerFavoritoPorId(idFavorito);
+    return await FavoritoRepository.eliminarFavorito(idFavorito);
   }
 }
