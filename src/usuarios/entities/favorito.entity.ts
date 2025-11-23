@@ -1,32 +1,32 @@
-import { Entity, PrimaryGeneratedColumn, ManyToOne, JoinColumn, Column } from "typeorm";
-import { Usuario } from "./usuario.entity";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from "typeorm";
+import { Usuario } from "../../usuarios/entities/usuario.entity";
 import { Arreglo } from "../../arreglos/entities/arreglo.entity";
 
-@Entity("FAVORITO")
+@Entity({name: "favorito"})
 export class Favorito {
-  @PrimaryGeneratedColumn({ name: "idFavorito" })
-  idFavorito!: number;
+    @PrimaryGeneratedColumn()
+    idFavorito!: number;
 
-  @ManyToOne(() => Usuario, usuario => usuario.favoritos)
-  @JoinColumn({ name: "idUsuario" })
-  usuario!: Usuario;
+    @ManyToOne(() => Usuario, { nullable: false })
+    @JoinColumn({ name: "idUsuario" })
+    usuario!: Usuario;
 
-  @ManyToOne(() => Arreglo)
-  @JoinColumn({ name: "idArreglo" })
-  arreglo!: Arreglo;
+    @ManyToOne(() => Arreglo, { nullable: false })
+    @JoinColumn({ name: "idArreglo" })
+    arreglo!: Arreglo;
 
-  @Column({ length: 50, nullable: true })
-  usuarioCreacion?: string;
+    @Column()
+    usuarioCreacion!: string;
 
-  @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" })
-  fechaCreacion?: Date;
+    @Column({ type: "timestamp" })
+    fechaCreacion!: Date;
 
-  @Column({ length: 50, nullable: true })
-  usuarioModificacion?: string;
+    @Column({ nullable: true })
+    usuarioModificacion!: string;
 
-  @Column({ type: "timestamp", nullable: true })
-  fechaModificacion?: Date;
+    @Column({ type: "timestamp", nullable: true })
+    fechaModificacion!: Date;
 
-  @Column({ default: true })
-  estado?: boolean;
+    @Column({ default: true })
+    estado!: boolean;
 }

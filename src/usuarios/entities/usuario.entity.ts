@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn, OneToMany } from "typeorm";
 import { Persona } from "../../personas/entities/persona.entity";
-import { RolUsuario } from "./rolusuario.entity";
+import { RolUsuario } from "./rolusuario.entity"; 
 import { Favorito } from "./favorito.entity";
 
 @Entity({ name: "usuario" })
