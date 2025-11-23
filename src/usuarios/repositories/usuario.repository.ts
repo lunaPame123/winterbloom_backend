@@ -14,24 +14,27 @@ export const UsuarioRepository = AppDataSource.getRepository(Usuario).extend({
 
   async crearUsuario (data: Partial<Usuario>){
     if (data.contrasena){
-      const salt = await bcrypt.genSalt(10);
-      data.contrasena = await bcrypt.hash(data.contrasena, salt);
+      data.contrasena = await this.encriptarContrasena(data.contrasena);
     }
-    const usuario = this.create(data);
-    return await this.save(usuario);
+    const nuevoUsuario = this.create(data);
+    return await this.save(nuevoUsuario);
   },
 
-  async actualizarUsuario(idUsuarioActualizado: number, data: Partial<Usuario>){
+  async actualizarUsuario(idUsuario: number, data: Partial<Usuario>){
     if (data.contrasena){
-      const salt = await bcrypt.genSalt(10);
-      data.contrasena = await bcrypt.hash(data.contrasena, salt);
+      data.contrasena = await this.encriptarContrasena(data.contrasena);
     }
-    await this.update(idUsuarioActualizado, data);
-    return await this.findOne({ where: { idUsuario: idUsuarioActualizado}, relations: ["persona", "roles"] });
+    await this.update(idUsuario, data);
+    return await this.findOne({ where: { idUsuario }, relations: ["persona", "roles"] });
   },
 
   async eliminarUsuario(idUsuario: number){
     await this.update(idUsuario, { estado: false });
     return true;
+  },
+
+  async encriptarContrasena(contrasena: string) {
+    const salt = await bcrypt.genSalt(10);
+    return await bcrypt.hash(contrasena, salt);
   }
 })
