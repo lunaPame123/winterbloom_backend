@@ -2,11 +2,16 @@ import { Router } from "express";
 import { PedidoController } from "../controllers/pedido.controller";
 
 const router = Router();
-const pedidoController = new PedidoController();
 
-router.post("/", (req, res) => pedidoController.crearPedido(req, res));
-router.get("/", (req, res) => pedidoController.obtenerTodos(req, res));
-router.get("/:id", (req, res) => pedidoController.obtenerPorId(req, res));
-router.delete("/:id", (req, res) => pedidoController.eliminar(req, res));
+// --- PEDIDOS ---
+router.post("/", PedidoController.crearPedido);
+router.get("/", PedidoController.obtenerTodos);
+router.get("/:idPedido", PedidoController.obtenerPorId);
+router.get("/usuario/:idUsuario", PedidoController.obtenerPorUsuario);
+router.put("/:idPedido/estado", PedidoController.actualizarEstado); // actualizar estado del pedido
+
+// --- DETALLES DE PEDIDOS ---
+router.get("/:idPedido/detalles", PedidoController.obtenerDetalles);
+router.post("/detalles", PedidoController.crearDetalle);
 
 export default router;
