@@ -3,21 +3,21 @@ import { Favorito } from "../entities/favorito.entity";
 
 export const FavoritoRepository = AppDataSource.getRepository(Favorito).extend({
 
-    async obtenerTodosLosFavoritos() {
+    async listarTodosLosFavoritos() {
         return await this.find({ 
             relations: ["usuario", "arreglo"],
             order: { idFavorito: "ASC" }
         });
     },
 
-    async obtenerFavoritosPorId(id: number) {
+    async obtenerFavoritoPorId(idFavorito: number) {
         return await this.findOne({ 
-            where: { idFavorito: id },
+            where: { idFavorito },
             relations: ["usuario", "arreglo"]
         });
     },
 
-    async obtenerFavoritosPorUsuario(idUsuario: number) {
+    async listarFavoritosPorUsuario(idUsuario: number) {
         return await this.find({
             where: { usuario: { idUsuario }, estado: true },
             relations: ["usuario", "arreglo"]
@@ -25,12 +25,12 @@ export const FavoritoRepository = AppDataSource.getRepository(Favorito).extend({
     },
 
     async crearFavorito(data: Partial<Favorito>) {
-        const favorito = this.create(data);
-        return await this.save(favorito);
+        const nuevoFavorito = this.create(data);
+        return await this.save(nuevoFavorito);
     },
 
-    async eliminarFavorito(id: number) {
-        await this.update(id, { estado: false });
+    async eliminarFavorito(idFavorito: number) {
+        await this.update(idFavorito, { estado: false });
         return true;
     }
 });
