@@ -2,16 +2,22 @@ import { Router } from "express";
 import { ArregloController } from "../controllers/arreglo.controller";
 
 const router = Router();
-const controller = new ArregloController();
 
-router.get("/", controller.obtenerTodos.bind(controller));
-router.get("/activos", controller.obtenerActivos.bind(controller));
-router.get("/categoria/:categoria", controller.buscarPorCategoria.bind(controller));
-router.get("/buscar", controller.buscarPorNombre.bind(controller));
-router.get("/:id", controller.obtenerPorId.bind(controller));
+// Rutas para Arreglos
+router.get("/", ArregloController.obtenerTodosArreglos);
+router.get("/categoria/:categoria", ArregloController.buscarArreglosPorCategoria);
+router.get("/nombre/:nombre", ArregloController.buscarArreglosPorNombre);
+router.post("/", ArregloController.crearArreglo);
+router.put("/:id", ArregloController.actualizarArreglo);
+router.delete("/:id", ArregloController.eliminarArreglo);
 
-router.post("/", controller.crear.bind(controller));
-router.put("/:id", controller.actualizar.bind(controller));
-router.delete("/:id", controller.eliminar.bind(controller));
+// Rutas para Composiciones de Arreglos
+router.get("/:idArreglo/composiciones", ArregloController.obtenerComposicionesPorArreglo);
+router.get("/composicion/:idFlor", ArregloController.obtenerComposicionesPorFlor);
+router.get("/composicion/id/:idComposicion", ArregloController.obtenerComposicionPorId);
+router.post("/composicion", ArregloController.crearComposicion);
+router.put("/composicion/:id", ArregloController.actualizarComposicion);
+router.delete("/composicion/:id", ArregloController.eliminarComposicion);
+
 
 export default router;
