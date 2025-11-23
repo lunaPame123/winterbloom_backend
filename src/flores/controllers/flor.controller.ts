@@ -5,76 +5,76 @@ const florService = new FlorService();
 
 export class FlorController {
 
-  async obtenerTodos(res: Response) {
+  static async obtenerTodas(req: Request, res: Response) {
     try {
-      const data = await florService.obtenerTodos();
-      return res.json(data);
+      const flores = await florService.obtenerTodas();
+      return res.json(flores);
     } catch (error: any) {
       return res.status(500).json({ mensaje: error.message });
     }
   }
 
-  async obtenerActivos(res: Response) {
+  static async obtenerActivas(req: Request, res: Response) {
     try {
-      const data = await florService.obtenerActivos();
-      return res.json(data);
+      const floresActivas = await florService.obtenerActivas();
+      return res.json(floresActivas);
     } catch (error: any) {
       return res.status(500).json({ mensaje: error.message });
     }
   }
 
-  async obtenerPorId(req: Request, res: Response) {
+  static async obtenerPorId(req: Request, res: Response) {
     try {
-      const id = Number(req.params.id);
-      const data = await florService.obtenerPorId(id);
-      return res.json(data);
+      const id = Number(req.params.idFlor);
+      const flor = await florService.obtenerPorId(id);
+      return res.json(flor);
     } catch (error: any) {
       return res.status(404).json({ mensaje: error.message });
     }
   }
 
-  async buscarPorColor(req: Request, res: Response) {
+  static async buscarPorColor(req: Request, res: Response) {
     try {
       const color = req.params.color;
-      const data = await florService.buscarPorColor(color);
-      return res.json(data);
+      const flores = await florService.buscarPorColor(color);
+      return res.json(flores);
     } catch (error: any) {
       return res.status(500).json({ mensaje: error.message });
     }
   }
 
-  async buscarPorNombre(req: Request, res: Response) {
+  static async buscarPorNombre(req: Request, res: Response) {
     try {
-      const nombre = req.query.nombre as string;
-      const data = await florService.buscarPorNombre(nombre);
-      return res.json(data);
+      const nombreFlor = req.query.nombre as string;
+      const flores = await florService.buscarPorNombre(nombreFlor);
+      return res.json(flores);
     } catch (error: any) {
       return res.status(500).json({ mensaje: error.message });
     }
   }
 
-  async crear(req: Request, res: Response) {
+  static async crearFlor(req: Request, res: Response) {
     try {
-      const data = await florService.crear(req.body);
-      return res.status(201).json(data);
+      const nuevaFlor = await florService.crear(req.body);
+      return res.status(201).json(nuevaFlor);
     } catch (error: any) {
       return res.status(400).json({ mensaje: error.message });
     }
   }
 
-  async actualizar(req: Request, res: Response) {
+  static async actualizarFlor(req: Request, res: Response) {
     try {
-      const id = Number(req.params.id);
-      const data = await florService.actualizar(id, req.body);
-      return res.json(data);
+      const id = Number(req.params.idFlor);
+      const florActualizada = await florService.actualizar(id, req.body);
+      return res.json(florActualizada);
     } catch (error: any) {
       return res.status(400).json({ mensaje: error.message });
     }
   }
 
-  async eliminar(req: Request, res: Response) {
+  static async eliminar(req: Request, res: Response) {
     try {
-      const id = Number(req.params.id);
+      const id = Number(req.params.idFlor);
       await florService.eliminacionLogica(id);
       return res.json({ mensaje: "Flor desactivada correctamente" });
     } catch (error: any) {
