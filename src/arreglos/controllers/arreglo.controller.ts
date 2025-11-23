@@ -55,7 +55,7 @@ export class ArregloController {
     }
   }
 
-  async actualizarArreglo(req: Request, res: Response) {
+  static async actualizarArreglo(req: Request, res: Response) {
     try {
       const id = Number(req.params.idArreglo);
       const arregloActualizado = await arregloService.actualizar(id, req.body);
@@ -65,7 +65,7 @@ export class ArregloController {
     }
   }
 
-  async eliminarArreglo(req: Request, res: Response) {
+  static async eliminarArreglo(req: Request, res: Response) {
     try {
       const id = Number(req.params.idArreglo);
       await arregloService.eliminar(id);
