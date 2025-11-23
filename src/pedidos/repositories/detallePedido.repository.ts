@@ -4,16 +4,11 @@ import { DetallePedido } from "../entities/detallepedido.entity";
 export const DetallePedidoRepository = AppDataSource.getRepository(DetallePedido).extend({
   
   async crearDetallePedido(data: Partial<DetallePedido>) {
-    const detalle = this.create(data);
-    return await this.save(detalle);
+    const nuevoDetalle = this.create(data);
+    return await this.save(nuevoDetalle);
   },
 
-  async crearVariosDetalles(detalles: Partial<DetallePedido>[]) {
-    const nuevos = this.create(detalles);
-    return await this.save(nuevos);
-  },
-
-  async obtenerDetallesPorPedido(idPedido: number) {
+  async obtenerDetallePorPedido(idPedido: number) {
     return await this.find({
       where: { pedido: { idPedido } },
       relations: ["arreglo"],
@@ -22,5 +17,6 @@ export const DetallePedidoRepository = AppDataSource.getRepository(DetallePedido
 
   async eliminarDetalle(idDetalle: number) {
     await this.delete(idDetalle);
+    return true;
   }
 });

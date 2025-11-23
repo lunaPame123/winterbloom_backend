@@ -1,6 +1,6 @@
 import { AppDataSource } from "../../database/data-source";
 import { Pedido } from "../entities/pedido.entity";
-import { Persona } from "../../personas/entities/persona.entity";
+import { Usuario } from "../../usuarios/entities/usuario.entity";
 
 export const PedidoRepository = AppDataSource.getRepository(Pedido).extend({
     async crearPedido(data: Partial<Pedido>){
@@ -8,25 +8,25 @@ export const PedidoRepository = AppDataSource.getRepository(Pedido).extend({
         return await this.save(nuevoPedido);
     },
 
-    async obtenerPedidos() {
+    async listarPedidos() {
         return await this.find({
-        relations: ["persona"],
+            relations: ["usuario", "detalles", "detalles.arreglo"],
+            order: { fechaCreacion: "DESC" },
         });
     },
 
     async obtenerPedidoPorId(idPedido: number) {
         return await this.findOne({
         where: { idPedido },
-        relations: ["persona", "detalles", "detalles.arreglo"],
+        relations: ["usuario", "detalles", "detalles.arreglo"],
         });
     },
 
-    async obtenerPedidosPorPersona(idPersona: number) {
+    async obtenerPedidosPorUsuario(idUsuario: number) {
         return await this.find({
-        where: {
-            persona: { idPersona },
-        },
-        relations: ["persona"],
+            where: { usuario: { idUsuario } },
+            relations: ["usuario", "detalles", "detalles.arreglo"],
+            order: { fechaCreacion: "DESC" },
         });
     },
 
@@ -35,10 +35,8 @@ export const PedidoRepository = AppDataSource.getRepository(Pedido).extend({
         return await this.obtenerPedidoPorId(idPedido);
     },
 
-    async eliminarPedido(idPedido: number) {
-        await this.update(idPedido, {
-        estado: false,
-        fechaModificacion: new Date(),
-        });
+    async cambiarEstado (idPedido: number, nuevoEstado: "pendiente" | "listo" | "entregado" | "cancelado") {
+        await this.update(idPedido, { estado: nuevoEstado, fechaModificacion: new Date() });
+        return await this.obtenerPedidoPorId(idPedido);
     }
 })
