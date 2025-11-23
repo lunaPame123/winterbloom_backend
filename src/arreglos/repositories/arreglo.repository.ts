@@ -6,8 +6,8 @@ export const ArregloRepository = AppDataSource.getRepository(Arreglo).extend({
         return await this.find({ order: { idArreglo: "ASC" } });
     },
 
-    async obtenerArregloPorId(idArregloObtenido: number){
-        return await this.findOne({ where: { idArreglo: idArregloObtenido } });
+    async obtenerArregloPorId(idArreglo: number){
+        return await this.findOne({ where: { idArreglo } });
     },
 
     async buscarArregloPorCategoria(categoria: string){
@@ -28,17 +28,17 @@ export const ArregloRepository = AppDataSource.getRepository(Arreglo).extend({
     },
 
     async crearArreglo(data: Partial<Arreglo>) {
-        const arreglo = this.create(data);
-        return await this.save(arreglo);
+        const nuevoArreglo = this.create(data);
+        return await this.save(nuevoArreglo);
     },
 
-    async actualizarArreglo(id: number, data: Partial<Arreglo>) {
-        await this.update(id, data);
-        return await this.obtenerArregloPorId(id);
+    async actualizarArreglo(idArreglo: number, data: Partial<Arreglo>) {
+        await this.update(idArreglo, data);
+        return await this.obtenerArregloPorId(idArreglo);
     },
 
-    async eliminarArreglo(id: number) {
-        await this.update(id, { estado: false });
+    async eliminarArreglo(idArreglo: number) {
+        await this.update(idArreglo, { estado: false });
         return true;
     }
 });

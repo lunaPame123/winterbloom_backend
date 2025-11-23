@@ -10,9 +10,9 @@ export const ComposicionArregloRepository = AppDataSource.getRepository(Composic
         });
     },
 
-    async obtenerComposicionesPorId(id: number) {
+    async obtenerComposicionesPorId(idComposicion: number) {
         return await this.findOne({ 
-            where: { idComposicion: id },
+            where: { idComposicion },
             relations: ["arreglo", "flor"]
         });
     },
@@ -31,18 +31,18 @@ export const ComposicionArregloRepository = AppDataSource.getRepository(Composic
         });
     },
 
-    async crearComposiciones(data: Partial<ComposicionArreglo>) {
-        const composicion = this.create(data);
-        return await this.save(composicion);
+    async crearComposicion(data: Partial<ComposicionArreglo>) {
+        const nuevaComposicion = this.create(data);
+        return await this.save(nuevaComposicion);
     },
 
-    async actualizarComposicion(id: number, data: Partial<ComposicionArreglo>) {
-        await this.update(id, data);
-        return await this.obtenerComposicionesPorId(id);
+    async actualizarComposicion(idComposicion: number, data: Partial<ComposicionArreglo>) {
+        await this.update(idComposicion, data);
+        return await this.obtenerComposicionesPorId(idComposicion);
     },
 
-    async eliminarComposicion(id: number) {
-        await this.update(id, { estado: false });
+    async eliminarComposicion(idComposicion: number) {
+        await this.update(idComposicion, { estado: false });
         return true;
     }
 
