@@ -6,19 +6,19 @@ export class Flor {
     idFlor!: number;
 
     @Column({length: 100})
-    nombre!: string;
+    nombreFlor!: string;
 
     @Column({ length: 50 })
     color!: string;
 
-    @Column({ type: 'text' })
+    @Column({ type: 'text', nullable: true })
     significado?: string;
 
     @Column({ type: 'decimal', precision: 10, scale: 2 })
     precio!: number;
 
     @Column({ nullable: true })
-    imagen!: string;
+    imagen?: string;
 
     @Column()
     usuarioCreacion!: string;
@@ -27,10 +27,10 @@ export class Flor {
     fechaCreacion!: Date;
 
     @Column({ nullable: true })
-    usuarioModificacion!: string;
+    usuarioModificacion?: string;
 
     @Column({ type: 'timestamp', nullable: true })
-    fechaModificacion!: Date;
+    fechaModificacion?: Date;
 
     @Column({ default: true })
     estado!: boolean;
