@@ -4,11 +4,8 @@ import { PersonaController } from "../controllers/persona.controller";
 const router = Router();
 
 router.get("/", PersonaController.listar);
-
-router.get("/:id", PersonaController.obtener);
-
+router.get("/:idPersona", PersonaController.obtener);
 router.post("/", PersonaController.crear);
-
-router.put("/:id", PersonaController.actualizar);
+router.put("/:idPersona", PersonaController.actualizar);
 
 export default router;
