@@ -6,8 +6,8 @@ export class ArregloService {
         return await ArregloRepository.obtenerTodosLosArreglos();
     }
 
-    async obtenerPorId(id: number) {
-        const arreglo = await ArregloRepository.obtenerArregloPorId(id);
+    async obtenerPorId(idArreglo: number) {
+        const arreglo = await ArregloRepository.obtenerArregloPorId(idArreglo);
         if (!arreglo) {
             throw new Error("Arreglo no encontrado");
         }
@@ -33,13 +33,13 @@ export class ArregloService {
         return await ArregloRepository.crearArreglo(data);
     }
 
-    async actualizar(id: number, data: Partial<Arreglo>) {
-        await this.obtenerPorId(id);
-        return await ArregloRepository.actualizarArreglo(id, data);
+    async actualizar(idArreglo: number, data: Partial<Arreglo>) {
+        await this.obtenerPorId(idArreglo);
+        return await ArregloRepository.actualizarArreglo(idArreglo, data);
     }
 
-    async eliminar(id: number) {
-        await this.obtenerPorId(id); 
-        return await ArregloRepository.eliminarArreglo(id);
+    async eliminar(idArreglo: number) {
+        await this.obtenerPorId(idArreglo); 
+        return await ArregloRepository.eliminarArreglo(idArreglo);
     }
 }

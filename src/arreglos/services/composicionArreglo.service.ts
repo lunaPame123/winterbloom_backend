@@ -28,16 +28,16 @@ export class ComposicionArregloService {
     if (!data.flor) throw new Error("Se debe especificar la flor");
     if (!data.cantidad || data.cantidad <= 0) throw new Error("La cantidad debe ser mayor a cero");
 
-    return await ComposicionArregloRepository.crearComposiciones(data);
+    return await ComposicionArregloRepository.crearComposicion(data);
   }
 
-  async actualizar(id: number, data: Partial<ComposicionArreglo>) {
-    await this.obtenerPorId(id);
-    return await ComposicionArregloRepository.actualizarComposicion(id, data);
+  async actualizar(idComposicion: number, data: Partial<ComposicionArreglo>) {
+    await this.obtenerPorId(idComposicion);
+    return await ComposicionArregloRepository.actualizarComposicion(idComposicion, data);
   }
 
-  async eliminacionLogica(id: number) {
-    await this.obtenerPorId(id);
-    return await ComposicionArregloRepository.eliminarComposicion(id);
+  async eliminacionLogica(idComposicion: number) {
+    await this.obtenerPorId(idComposicion);
+    return await ComposicionArregloRepository.eliminarComposicion(idComposicion);
   }
 }
