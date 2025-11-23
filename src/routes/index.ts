@@ -2,25 +2,17 @@ import { Router } from "express";
 import personaRoutes from "../personas/routes/persona.routes";
 import usuarioRoutes from "../usuarios/routes/usuario.routes";
 import rolRoutes from "../roles/routes/rol.routes";
-import rolUsuarioRoutes from "../usuarios/routes/rolusuario.routes";
 import arregloRoutes from "../arreglos/routes/arreglo.routes";
 import florRoutes from "../flores/routes/flor.routes";
-import composicionArregloRoutes from "../arreglos/routes/composicionArreglo.routes";
-import favoritoRoutes from "../usuarios/routes/favorito.routes";
 import pedidoRoutes from "../pedidos/routes/pedido.routes";
-import detalleRoutes from "../pedidos/routes/detallepedido.routes";
 
 const router = Router();
 
 router.use("/personas", personaRoutes);
 router.use("/usuarios", usuarioRoutes);
 router.use("/roles", rolRoutes);
-router.use("/roles-usuario", rolUsuarioRoutes);
 router.use("/arreglos", arregloRoutes);
 router.use("/flores", florRoutes);
-router.use("/composiciones", composicionArregloRoutes);
-router.use("/favoritos", favoritoRoutes);
 router.use("/pedidos", pedidoRoutes);
-router.use("/detalle-pedidos", detalleRoutes);
 
 export default router;
