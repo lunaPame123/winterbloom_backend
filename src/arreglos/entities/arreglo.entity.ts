@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
+import { ComposicionArreglo } from "./composicionArreglo.entity";
 
 @Entity({ name: "arreglo"})
 export class Arreglo {
@@ -8,30 +9,33 @@ export class Arreglo {
   @Column({ length: 100 })
   nombre!: string;
 
-  @Column({ type: "text" })
+  @Column({ type: "text", nullable: true })
   descripcion?: string;
 
   @Column({ type: "decimal", precision: 10, scale: 2 })
   precio!: number;
 
-  @Column({ length: 50 })
+  @Column({ length: 50, nullable: true })
   categoria?: string;
 
   @Column({ nullable: true })
   imagen?: string;
 
-  @Column()
+  @Column({ length: 50, nullable: true })
   usuarioCreacion?: string;
 
-  @Column({ type: "timestamp" })
+  @Column({ nullable: true })
   fechaCreacion?: Date;
 
-  @Column({ nullable: true })
+  @Column({ length: 50, nullable: true })
   usuarioModificacion?: string;
 
-  @Column({ type: "timestamp", nullable: true })
+  @Column({ nullable: true })
   fechaModificacion?: Date;
 
   @Column({ default: true })
   estado?: boolean;
+
+  @OneToMany(() => ComposicionArreglo, composicion => composicion.arreglo)
+  composiciones?: ComposicionArreglo[];
 }

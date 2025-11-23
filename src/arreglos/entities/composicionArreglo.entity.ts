@@ -1,5 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from "typeorm";
-import { Arreglo } from "../../arreglos/entities/arreglo.entity";
+import { Arreglo } from "./arreglo.entity";
 import { Flor } from "../../flores/entities/flor.entity";
 
 
@@ -8,7 +8,7 @@ export class ComposicionArreglo {
     @PrimaryGeneratedColumn()
     idComposicion!: number;
 
-    @ManyToOne(() => Arreglo, { nullable: false })
+    @ManyToOne(() => Arreglo, arreglo => arreglo.composiciones, { nullable: false })
     @JoinColumn({ name: "idArreglo" })
     arreglo!: Arreglo;
 
@@ -19,7 +19,7 @@ export class ComposicionArreglo {
     @Column({ type: "int", default: 1 })
     cantidad!: number;
 
-    @Column()
+    @Column({ length: 50 })
     usuarioCreacion!: string;
 
     @Column({ type: "timestamp" })
