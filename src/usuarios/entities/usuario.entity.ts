@@ -4,7 +4,7 @@ import { RolUsuario } from "./rolusuario.entity";
 import { Favorito } from "./favorito.entity";
 
 @Entity({ name: "usuario" })
-export class Usuario{
+export class Usuario {
   @PrimaryGeneratedColumn()
   idUsuario!: number;
 
@@ -21,7 +21,7 @@ export class Usuario{
   @Column({ length: 50, nullable: true })
   usuarioCreacion?: string;
 
-  @Column()
+  @Column({ nullable: true })
   fechaCreacion?: Date;
 
   @Column({ length: 50, nullable: true })
