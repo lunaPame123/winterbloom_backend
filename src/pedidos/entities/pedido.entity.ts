@@ -1,15 +1,15 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, OneToMany } from "typeorm";
-import { Persona } from "../../personas/entities/persona.entity";
-import { DetallePedido } from "../../detallePedidos/entities/detallepedido.entity"; 
+import { Usuario } from "../../usuarios/entities/usuario.entity";
+import { DetallePedido } from "./detallepedido.entity";
 
 @Entity({name: "pedido"})
 export class Pedido {
   @PrimaryGeneratedColumn()
   idPedido!: number;
 
-  @ManyToOne(() => Persona, { nullable: false })
-  @JoinColumn({ name: "idPersona" })
-  persona!: Persona;
+  @ManyToOne(() => Usuario, { nullable: false })
+  @JoinColumn({ name: "idUsuario" })
+  usuario!: Usuario;
 
   @Column({ type: "timestamp" })
   fechaPedido!: Date;
@@ -17,20 +17,20 @@ export class Pedido {
   @Column({ type: "decimal", precision: 10, scale: 2 })
   total!: number;
 
-  @Column({ default: true })
-  estado!: boolean;
-
   @Column({ length: 50, nullable: true })
-  usuarioCreacion!: string;
+  usuarioCreacion?: string;
 
   @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" })
   fechaCreacion!: Date;
 
   @Column({ length: 50, nullable: true })
-  usuarioModificacion!: string;
+  usuarioModificacion?: string;
 
   @Column({ type: "timestamp", nullable: true })
-  fechaModificacion!: Date;
+  fechaModificacion?: Date;
+
+  @Column({ type: "varchar", length: 20, default: "pendiente" })
+  estado!: "pendiente" | "listo" | "entregado" | "cancelado";
 
   @OneToMany(() => DetallePedido, detalle => detalle.pedido)
   detalles!: DetallePedido[];
