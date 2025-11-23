@@ -4,18 +4,18 @@ import { Persona } from "../entities/persona.entity";
 export const PersonaRepository = AppDataSource.getRepository(Persona).extend({
 
   async buscarPorId(idPersona: number) {
-    return await this.findOne({
+    return this.findOne({
       where: { idPersona },
-      relations: ["usuario", "pedidos"],
+      relations: ["usuario"],
     });
   },
 
   async buscarPorCi(ci: string) {
-    return await this.findOne({ where: { ci } });
+    return this.findOne({ where: { ci } });
   },
 
   async listarConUsuarios() {
-    return await this.find({
+    return this.find({
       relations: ["usuario"],
       order: { idPersona: "ASC" }
     });
@@ -23,12 +23,12 @@ export const PersonaRepository = AppDataSource.getRepository(Persona).extend({
 
   async crearPersona(data: Partial<Persona>) {
     const persona = this.create(data);
-    return await this.save(persona);
+    return this.save(persona);
   },
 
   async actualizarPersona(idPersona: number, data: Partial<Persona>) {
     await this.update(idPersona, data);
-    return await this.buscarPorId(idPersona);
+    return this.buscarPorId(idPersona);
   },
 
 });
