@@ -2,6 +2,8 @@ import { Router } from "express";
 import { ArregloController } from "../controllers/arreglo.controller";
 import { CrearArregloDto } from "../dtos/crearArreglo.dto";
 import { ActualizarArregloDto } from "../dtos/actualizarArreglo.dto";
+import { CrearComposicionDto } from "../dtos/crearComposicion.dto";
+import { ActualizarComposicionDto } from "../dtos/actualizarComposicion.dto";
 import { validarEntidad } from "../../middlewares/validarEntidad";
 
 const router = Router();
@@ -18,8 +20,8 @@ router.delete("/:id", ArregloController.eliminarArreglo);
 router.get("/:idArreglo/composiciones", ArregloController.obtenerComposicionesPorArreglo);
 router.get("/composicion/:idFlor", ArregloController.obtenerComposicionesPorFlor);
 router.get("/composicion/id/:idComposicion", ArregloController.obtenerComposicionPorId);
-router.post("/composicion", ArregloController.crearComposicion);
-router.put("/composicion/:id", ArregloController.actualizarComposicion);
+router.post("/composicion", validarEntidad(CrearComposicionDto), ArregloController.crearComposicion);
+router.put("/composicion/:id", validarEntidad(ActualizarComposicionDto), ArregloController.actualizarComposicion);
 router.delete("/composicion/:id", ArregloController.eliminarComposicion);
 
 
