@@ -1,5 +1,8 @@
 import { Router } from "express";
 import { ArregloController } from "../controllers/arreglo.controller";
+import { CrearArregloDto } from "../dtos/crearArreglo.dto";
+import { ActualizarArregloDto } from "../dtos/actualizarArreglo.dto";
+import { validarEntidad } from "../../middlewares/validarEntidad";
 
 const router = Router();
 
@@ -7,8 +10,8 @@ const router = Router();
 router.get("/", ArregloController.obtenerTodosArreglos);
 router.get("/categoria/:categoria", ArregloController.buscarArreglosPorCategoria);
 router.get("/nombre/:nombre", ArregloController.buscarArreglosPorNombre);
-router.post("/", ArregloController.crearArreglo);
-router.put("/:id", ArregloController.actualizarArreglo);
+router.post("/", validarEntidad(CrearArregloDto), ArregloController.crearArreglo);
+router.put("/:id", validarEntidad(ActualizarArregloDto), ArregloController.actualizarArreglo);
 router.delete("/:id", ArregloController.eliminarArreglo);
 
 // Rutas para Composiciones de Arreglos
