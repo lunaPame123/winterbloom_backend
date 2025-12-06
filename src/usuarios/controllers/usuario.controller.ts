@@ -8,57 +8,57 @@ const rolUsuarioService = new RolUsuarioService();
 const favoritoService = new FavoritoService();
 
 export class UsuarioController {
-  //-----------USUARIOS-----------------------
+  //----------- USUARIOS -----------------------
   static async crearUsuario(req: Request, res: Response) {
     try {
       const usuario = await usuarioService.crearUsuario(req.body);
       res.status(201).json(usuario);
-    } catch (error : any) {
+    } catch (error: any) {
       res.status(400).json({ error: error.message });
     }
   }
 
-  static async listarUsuarios (req: Request, res: Response){
+  static async listarUsuarios(req: Request, res: Response) {
     try {
       const usuarios = await usuarioService.listarUsuario();
       res.json(usuarios);
-    } catch (error: any){
+    } catch (error: any) {
       res.status(400).json({ error: error.message });
     }
   }
 
-  static async obtenerUsuario (req: Request, res: Response){
+  static async obtenerUsuario(req: Request, res: Response) {
     try {
       const idUsuario = parseInt(req.params.idUsuario);
       const usuario = await usuarioService.obtenerUsuario(idUsuario);
       res.json(usuario);
-    } catch (error: any){
-      res.status(400).json({ error: error.message });
+    } catch (error: any) {
+      res.status(404).json({ error: error.message });
     }
   }
 
-  static async actualizarUsuario (req: Request, res: Response){
+  static async actualizarUsuario(req: Request, res: Response) {
     try {
       const idUsuario = parseInt(req.params.idUsuario);
       const usuario = await usuarioService.actualizarUsuario(idUsuario, req.body);
       res.json(usuario);
-    } catch (error: any){
+    } catch (error: any) {
       res.status(400).json({ error: error.message });
     }
   }
 
-  static async eliminarUsuario (req: Request, res: Response){
+  static async eliminarUsuario(req: Request, res: Response) {
     try {
       const idUsuario = parseInt(req.params.idUsuario);
       await usuarioService.eliminarUsuario(idUsuario);
-      res.json({ message: "Usuario eliminado (logicamente)" });
-    } catch (error: any){
+      res.json({ mensaje: "Usuario eliminado (lógicamente)" });
+    } catch (error: any) {
       res.status(400).json({ error: error.message });
     }
   }
 
   //----------- ASIGNACION DE ROLES -------------
-  static async asignarRol (req: Request, res: Response) {
+  static async asignarRol(req: Request, res: Response) {
     try {
       const { idUsuario, idRol } = req.body;
       const resultado = await rolUsuarioService.asignarRolAUsuario(idUsuario, idRol);
