@@ -1,8 +1,9 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
 import { ComposicionArreglo } from "./composicionArreglo.entity";
+import { Auditoria } from "../../auditoria/auditoria.entity";
 
 @Entity({ name: "arreglo"})
-export class Arreglo {
+export class Arreglo extends Auditoria {
   @PrimaryGeneratedColumn()
   idArreglo!: number;
 
@@ -20,21 +21,6 @@ export class Arreglo {
 
   @Column({ nullable: true })
   imagen?: string;
-
-  @Column({ length: 50, nullable: true })
-  usuarioCreacion?: string;
-
-  @Column({ nullable: true })
-  fechaCreacion?: Date;
-
-  @Column({ length: 50, nullable: true })
-  usuarioModificacion?: string;
-
-  @Column({ nullable: true })
-  fechaModificacion?: Date;
-
-  @Column({ default: true })
-  estado?: boolean;
 
   @OneToMany(() => ComposicionArreglo, composicion => composicion.arreglo)
   composiciones?: ComposicionArreglo[];

@@ -1,7 +1,8 @@
 import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Auditoria } from "../../auditoria/auditoria.entity";
 
 @Entity({ name: "flor"})
-export class Flor {
+export class Flor extends Auditoria{
     @PrimaryGeneratedColumn()
     idFlor!: number;
 
@@ -19,19 +20,4 @@ export class Flor {
 
     @Column({ nullable: true })
     imagen?: string;
-
-    @Column()
-    usuarioCreacion!: string;
-
-    @Column({ type: 'timestamp' })
-    fechaCreacion!: Date;
-
-    @Column({ nullable: true })
-    usuarioModificacion?: string;
-
-    @Column({ type: 'timestamp', nullable: true })
-    fechaModificacion?: Date;
-
-    @Column({ default: true })
-    estado!: boolean;
 }

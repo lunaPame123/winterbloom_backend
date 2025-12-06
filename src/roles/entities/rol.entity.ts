@@ -1,8 +1,9 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
 import { RolUsuario } from "../../usuarios/entities/rolusuario.entity";
+import { Auditoria } from "../../auditoria/auditoria.entity"; 
 
 @Entity({ name: "rol" })
-export class Rol {
+export class Rol extends Auditoria {
   @PrimaryGeneratedColumn()
   idRol!: number;
 
@@ -11,9 +12,6 @@ export class Rol {
 
   @Column({ type: "varchar", length: 255, nullable: true })
   descripcion?: string;
-
-  @Column({ default: true })
-  estado!: boolean;
 
   @OneToMany(() => RolUsuario, rolUsuario => rolUsuario.rol)
   usuarios!: RolUsuario[];

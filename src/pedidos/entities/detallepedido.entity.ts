@@ -1,9 +1,10 @@
 import { Entity, PrimaryGeneratedColumn, ManyToOne, JoinColumn, Column } from "typeorm";
 import { Pedido } from "./pedido.entity"; 
 import { Arreglo } from "../../arreglos/entities/arreglo.entity";
+import { Auditoria } from "../../auditoria/auditoria.entity";
 
 @Entity({name: "Detalle_Pedido"})
-export class DetallePedido {
+export class DetallePedido extends Auditoria{
   @PrimaryGeneratedColumn()
   idDetalle!: number;
 

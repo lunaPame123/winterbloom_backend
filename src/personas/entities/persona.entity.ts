@@ -1,8 +1,9 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn } from "typeorm";
 import { Usuario } from "../../usuarios/entities/usuario.entity";
+import { Auditoria } from "../../auditoria/auditoria.entity";
 
 @Entity({ name: "persona" })
-export class Persona {
+export class Persona extends Auditoria {
   @PrimaryGeneratedColumn()
   idPersona!: number;
 
@@ -30,4 +31,6 @@ export class Persona {
   @OneToOne(() => Usuario, usuario => usuario.persona)
   @JoinColumn({ name: "idUsuario"})
   usuario!: Usuario;
+  apellido: any;
+  telefono: any;
 }

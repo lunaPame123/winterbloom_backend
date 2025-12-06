@@ -2,9 +2,10 @@ import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn, OneToMany
 import { Persona } from "../../personas/entities/persona.entity";
 import { RolUsuario } from "./rolusuario.entity"; 
 import { Favorito } from "./favorito.entity";
+import { Auditoria } from "../../auditoria/auditoria.entity";
 
 @Entity({ name: "usuario" })
-export class Usuario {
+export class Usuario extends Auditoria {
   @PrimaryGeneratedColumn()
   idUsuario!: number;
 
@@ -17,21 +18,6 @@ export class Usuario {
 
   @Column()
   contrasena!: string;
-
-  @Column({ length: 50, nullable: true })
-  usuarioCreacion?: string;
-
-  @Column({ nullable: true })
-  fechaCreacion?: Date;
-
-  @Column({ length: 50, nullable: true })
-  usuarioModificacion?: string;
-
-  @Column({ nullable: true })
-  fechaModificacion?: Date;
-
-  @Column({ default: true })
-  estado?: boolean;
 
   @OneToMany(() => RolUsuario, rolUsuario => rolUsuario.usuario)
   roles!: RolUsuario[];
